@@ -30,9 +30,11 @@ int main(int argc, char* argv[]){
 
   //TESTING THE BINARY TREE HERE -----------------------------------------------------
   //TODO.. put the constructor for your binary tree here
+  BinaryTree binTree;
 
   for(auto i : values){
       //TODO.. call insert on binary tree with value i
+      binTree.Insert(i);
   }
   time.stop();
   cout << "Time for building (BST) " << time.getElapsedTimeInSec() << endl;
@@ -41,7 +43,7 @@ int main(int argc, char* argv[]){
   //search numbers in binary tree
   time.start();
   for(int i=tot/2; i < (tot/2) +100; i++){
-    int key = value[i];
+    int key = values[i];
       //TODO.. call search on binary tree with value key
   }
   time.stop();
@@ -52,7 +54,7 @@ int main(int argc, char* argv[]){
   //delete nodes from binary tree
   time.start();
   for(int i=tot/2; i < (tot/2) +100; i++){
-    int key = value[i];
+    int key = values[i];
       //TODO.. call delete on binary tree with value key
   }
   time.stop();
@@ -73,7 +75,7 @@ int main(int argc, char* argv[]){
   //search numbers in AVL tree
   time.start();
   for(int i=tot/2; i < (tot/2) +100; i++){
-    int key = value[i];
+    int key = values[i];
       //TODO.. call search on AVL tree with value key
   }
   time.stop();
@@ -84,7 +86,7 @@ int main(int argc, char* argv[]){
   //delete nodes from AVL tree
   time.start();
   for(int i=tot/2; i < (tot/2) +100; i++){
-    int key = value[i];
+    int key = values[i];
       //TODO.. call delete on AVL tree with value key
   }
   time.stop();
