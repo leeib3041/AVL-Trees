@@ -43,8 +43,9 @@ int main(int argc, char* argv[]){
   //search numbers in binary tree
   time.start();
   for(int i=tot/2; i < (tot/2) +100; i++){
-    int key = values[i];
+      int key = values[i];
       //TODO.. call search on binary tree with value key
+      binTree.Search(i);
   }
   time.stop();
   cout << "Time for searches (BST) " << time.getElapsedTimeInSec() << endl;
@@ -56,6 +57,7 @@ int main(int argc, char* argv[]){
   for(int i=tot/2; i < (tot/2) +100; i++){
     int key = values[i];
       //TODO.. call delete on binary tree with value key
+      binTree.Delete(i);
   }
   time.stop();
   cout << "Time for delete (BST) " << time.getElapsedTimeInSec() << endl;
@@ -65,33 +67,33 @@ int main(int argc, char* argv[]){
   //TESTING THE AVL TREE HERE -----------------------------------------------------
   //TODO.. put the constructor for your AVL tree here
 
-  for(auto i : values){
-      //TODO.. call insert on AVL tree with value i
-  }
-  time.stop();
-  cout << "Time for building (AVL) " << time.getElapsedTimeInSec() << endl;
+  // for(auto i : values){
+  //     //TODO.. call insert on AVL tree with value i
+  // }
+  // time.stop();
+  // cout << "Time for building (AVL) " << time.getElapsedTimeInSec() << endl;
 
-  //select and search 100 randomly generated numbers
-  //search numbers in AVL tree
-  time.start();
-  for(int i=tot/2; i < (tot/2) +100; i++){
-    int key = values[i];
-      //TODO.. call search on AVL tree with value key
-  }
-  time.stop();
-  cout << "Time for searches (AVL) " << time.getElapsedTimeInSec() << endl;
-
-
-  //select and search 100 randomly generated numbers
-  //delete nodes from AVL tree
-  time.start();
-  for(int i=tot/2; i < (tot/2) +100; i++){
-    int key = values[i];
-      //TODO.. call delete on AVL tree with value key
-  }
-  time.stop();
-  cout << "Time for delete (AVL) " << time.getElapsedTimeInSec() << endl;
+  // //select and search 100 randomly generated numbers
+  // //search numbers in AVL tree
+  // time.start();
+  // for(int i=tot/2; i < (tot/2) +100; i++){
+  //   int key = values[i];
+  //     //TODO.. call search on AVL tree with value key
+  // }
+  // time.stop();
+  // cout << "Time for searches (AVL) " << time.getElapsedTimeInSec() << endl;
 
 
-  return;
+  // //select and search 100 randomly generated numbers
+  // //delete nodes from AVL tree
+  // time.start();
+  // for(int i=tot/2; i < (tot/2) +100; i++){
+  //   int key = values[i];
+  //     //TODO.. call delete on AVL tree with value key
+  // }
+  // time.stop();
+  // cout << "Time for delete (AVL) " << time.getElapsedTimeInSec() << endl;
+
+
+  // return;
 }
