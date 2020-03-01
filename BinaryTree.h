@@ -19,7 +19,7 @@ class Node
     //constructor
     //remember to always inizialize pointers to NULL
     //getter and setter for other nodes and value
-    Node(): parent( nullptr ), left(nullptr), right(nullptr), key(0) {}
+    Node(): parent( nullptr ), left( nullptr ), right( nullptr ), key(0) {}
     ~Node() {}
 
     Node* getParent() { return parent; }
@@ -105,17 +105,15 @@ class BinaryTree
     }
 
     //helper function
-    Node* onlyChild( Node *child, Node *parent, Node *node )
+    Node* updateParent( Node *child, Node *parent, Node *node )
     {
-      child->setParent( parent );
-      if (parent == nullptr) {
-        delete (node);
-        return parent;
+      if (child != nullptr) child->setParent( parent );
+      if (parent == nullptr) root = child;
+      else {
+        if (parent->getLeft() == node) parent->setLeft( child );
+        else parent->setRight( child );
       }
-      if (parent->getLeft() == node) parent->setLeft( child );
-      else parent->setRight( child );
-      int key = node->getKey();
-      delete node;
+
       return parent;
     }
 
@@ -123,36 +121,40 @@ class BinaryTree
     {
       Node *curr = TreeSearch( key, node );
       if (curr != nullptr) {
-        Node *parent, *child;
-        if (curr->getLeft() == nullptr && curr->getRight() == nullptr) {
-          parent = curr->getParent();
-          delete curr;
-          cout << curr->getKey() << endl;
-          return parent;
-        }
-        else if (curr->getLeft() == nullptr) {
-          return onlyChild( curr->getRight(), curr->getParent(), curr );
-        }
-        else if (curr->getRight() == nullptr) {
-          return onlyChild( curr->getLeft(), curr->getParent(), curr );
-        }
+        Node *parent = nullptr, *child = nullptr;
+        //no children
+        if (curr->getLeft() == nullptr && curr->getRight() == nullptr) parent = updateParent( nullptr, curr->getParent(), curr );
+        //one child - right
+        else if (curr->getLeft() == nullptr) parent = updateParent( curr->getRight(), curr->getParent(), curr );
+        //one child - left
+        else if (curr->getRight() == nullptr) parent = updateParent( curr->getLeft(), curr->getParent(), curr );
+        //full children
         else {
           child = curr->getRight();
           while (child->getLeft() != nullptr) {
-            child = curr->getLeft();
+            child = child->getLeft();
           }
           curr->setKey( child->getKey() );
-          if (child->getRight() != nullptr) return onlyChild( child->getRight(), child->getParent(), child );
-          else {
-            parent = child->getParent();
-            delete child;
-            return parent;
-          }
+          parent = updateParent( child->getRight(), child->getParent(), child );
+          curr = child;
         }
+        delete curr;
+        return parent;
       }
-      else return node;
+      else {
+        cout << key << " not found in Tree!" << endl;
+        return node;
+      }
     }
-
+  
+    void TreeDestroy( Node *curr )
+    {
+      if (curr != nullptr) {
+        TreeDestroy( curr->getLeft() );
+        TreeDestroy( curr->getRight() );
+        delete curr;
+      }
+    }
 
   public:
     //functions required
@@ -163,7 +165,7 @@ class BinaryTree
     //- a function for inserting a new value in the tree
     //- a function for deleting a value from the tree
     BinaryTree(): root(nullptr) {}
-    ~BinaryTree() {}
+    ~BinaryTree() { Destroy(); }
 
     Node* getRoot() { return root; }
     void setRoot( int key )
@@ -174,6 +176,7 @@ class BinaryTree
 
     void printInOrder() { inOrder(root); }
     Node* Search( int key ) { return TreeSearch( key, getRoot() ); }
-    Node* Insert( int key ) { return TreeInsert( key, getRoot() ); }
+    Node* Insert( int key ) { return TreeInsert( key, root ); }
     Node* Delete( int key ) { return TreeDelete( key, getRoot() ); }
+    void Destroy() { TreeDestroy( root ); }
 };
