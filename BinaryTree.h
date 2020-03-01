@@ -179,7 +179,7 @@ class BinaryTree
     //- a function for inserting a new value in the tree
     //- a function for deleting a value from the tree
     BinaryTree(): root(nullptr) {}
-    ~BinaryTree() { Destroy(); }
+    ~BinaryTree() { TreeDestroy(root); }
 
     Node* getRoot() { return root; }
     void setRoot( int key )
@@ -192,5 +192,4 @@ class BinaryTree
     Node* Search( int key ) { return TreeSearch( key, root ); }
     Node* Insert( int key ) { return TreeInsert( key, root ); }
     Node* Delete( int key ) { return TreeDelete( key, root ); }
-    void Destroy() { TreeDestroy( root ); }
 };
