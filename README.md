@@ -21,7 +21,7 @@ Use the draft provided in `BinaryTree.h` for implementing a binary search tree. 
 The inorder visit can be a powerful debugging tool. Remember that in a Binary search tree as well as in the AVL tree an inorder visit should always return the keys stored in the tree in ascending order. If this is not happening, it means that something is wrong with your insert/remove/rotate implementation.
 M
 ###### Suggestion
-Every time you perform a search and an insert in a AVL tree you shoulld return the last (non null) node touched. You can implement this in the Binary search tree as well. This way we will reuse this function for implementing the `insert`, `search` and `delete` in the AVL tree.  
+Every time you perform a search and an insert in a AVL tree you should return the last (non null) node touched. You can implement this in the Binary search tree as well. This way we will reuse this function for implementing the `insert`, `search` and `delete` in the AVL tree.  
 
 
 

@@ -44,7 +44,7 @@ class BinaryTree
     void inOrder( Node *node )
     {
       if (root == nullptr) {
-        cout << "empty tree" << endl;
+        cout << "Empty tree" << endl;
         return;
       }
       else {
@@ -54,7 +54,7 @@ class BinaryTree
         int parent;
         if (node->getParent() != nullptr) parent = node->getParent()->getKey();
         else parent = 999;
-        cout << node->getKey() << " " <<  parent << endl;
+        cout << "key: " << node->getKey() << "  parent:" <<  parent << endl;
 
         if (node->getRight() != nullptr) {
           inOrder(node->getRight());
@@ -71,15 +71,32 @@ class BinaryTree
       return temp;
     }
 
+    //Helper function
+    bool hasChild( Node *node )
+    {
+      if (node == nullptr) return false;
+      if (node->getLeft() == nullptr && node->getRight() == nullptr) return false;
+      return true;
+    }
+
     Node* TreeSearch( int key, Node *node )
     {
-      if (root == nullptr) return root; // return NULL when searching empty tree
-      else if (node == nullptr) return node;
-      else {
-        if (key == node->getKey()) { return node; }
-        else if (key <= node->getKey()) return TreeSearch( key, node->getLeft() );
-        else return TreeSearch( key, node->getRight() );
+      //return null on empty tree or tree has only root node
+      if (root == nullptr) return root;
+      while (hasChild( node )) {
+        if (key == node->getKey()) return node;
+        else if (key <= node->getKey() && node->getLeft() != nullptr) node = node->getLeft();
+        else if (key > node->getKey() && node->getRight() != nullptr) node = node->getRight();
+        else return node;
       }
+      return node;
+    }
+
+    bool hasDupl( int key, Node* node )
+    {
+      if (key > node->getKey()) return false;
+      if (node->getLeft() == nullptr) return false;
+      return true;
     }
 
     Node* TreeInsert( int key, Node *node )
@@ -88,19 +105,17 @@ class BinaryTree
         setRoot(key);
         return root;
       }
-      else if (key <= node->getKey()) {
-        if (node->getLeft() != nullptr ) return TreeInsert( key, node->getLeft() );
-        else {
-          node->setLeft( createNode(key, node) );
-          return node->getLeft();
-        }
+
+      Node* curr = TreeSearch( key, node );
+      //handle duplicate key's
+      while (hasDupl( key, curr )) curr = TreeSearch( key, curr->getLeft() );
+      if (key <= curr->getKey()) {
+        curr->setLeft( createNode(key, curr) );
+        return curr->getLeft();
       }
       else {
-        if (node->getRight() != nullptr ) return TreeInsert( key, node->getRight() );
-        else {
-          node->setRight( createNode(key, node) );
-          return node->getRight();
-        }
+        curr->setRight( createNode(key, curr) );
+        return curr->getRight();
       }
     }
 
@@ -120,6 +135,7 @@ class BinaryTree
     Node* TreeDelete( int key, Node *node )
     {
       Node *curr = TreeSearch( key, node );
+      if (curr->getKey() != key) return node;
       if (curr != nullptr) {
         Node *parent = nullptr, *child = nullptr;
         //no children
@@ -141,12 +157,10 @@ class BinaryTree
         delete curr;
         return parent;
       }
-      else {
-        cout << key << " not found in Tree!" << endl;
-        return node;
-      }
+      else cout << "Key " << key << " not found in Tree!" << endl;
+      return node;
     }
-  
+
     void TreeDestroy( Node *curr )
     {
       if (curr != nullptr) {
@@ -175,8 +189,8 @@ class BinaryTree
     }
 
     void printInOrder() { inOrder(root); }
-    Node* Search( int key ) { return TreeSearch( key, getRoot() ); }
+    Node* Search( int key ) { return TreeSearch( key, root ); }
     Node* Insert( int key ) { return TreeInsert( key, root ); }
-    Node* Delete( int key ) { return TreeDelete( key, getRoot() ); }
+    Node* Delete( int key ) { return TreeDelete( key, root ); }
     void Destroy() { TreeDestroy( root ); }
 };
