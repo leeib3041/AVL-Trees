@@ -49,18 +49,23 @@ int main(int argc, char* argv[])
 
     AVLTree avl;
     
-    // avl.Insert(10);
-    // avl.Insert(5);
-    // avl.Insert(15);
-    // avl.Insert(3);
-    // avl.Insert(7);
-    // avl.Insert(1);
     avl.Insert(10);
     avl.Insert(5);
     avl.Insert(15);
+    // avl.Insert(3);
+    // avl.Insert(7);
+    // avl.Insert(1);
+    // avl.Insert(10);
+    // avl.Insert(2);
+    avl.Insert(55);
+    // avl.Insert(4);
+    // avl.Insert(7);
+    // avl.Insert(5);
+    // avl.Insert(15);
     avl.Insert(13);
     avl.Insert(17);
-    avl.Insert(18);
+    // avl.Insert(18);
+    // avl.Insert(1);
     avl.printInOrder();
     cout << endl;
     

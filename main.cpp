@@ -12,10 +12,10 @@ int main(int argc, char* argv[]){
   list<float> results_binary; //time for binary
 
   //for an increasing set of integers
-  int tot=100;
+  int tot=10000;
 
   int min=0;
-  int max=10000;
+  int max=1000;
   std::default_random_engine generator;
   std::uniform_int_distribution<int> distribution(min,max);
 
@@ -70,7 +70,7 @@ int main(int argc, char* argv[]){
 
   for(auto i : values){
       //TODO.. call insert on AVL tree with value i
-      // avl.Insert( i );
+      avl.Insert( i );
   }
   time.stop();
   cout << "Time for building (AVL) " << time.getElapsedTimeInSec() << endl;

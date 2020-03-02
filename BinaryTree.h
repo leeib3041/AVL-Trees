@@ -48,7 +48,6 @@ class BinaryTree
         return;
       }
       else {
-        cout << "root: " << root->getKey() << endl;
         if (node->getLeft() != nullptr) {
           inOrder(node->getLeft());
         }
@@ -106,7 +105,8 @@ class BinaryTree
     Node* TreeInsert( int key, Node *node )
     {
       if (root == nullptr) {
-        setRoot(key);
+        root = new Node();
+        root->setKey(key);
         return root;
       }
 
@@ -191,10 +191,9 @@ class BinaryTree
     ~BinaryTree() { TreeDestroy(root); }
 
     Node* getRoot() { return root; }
-    void setRoot( int key )
+    void setRoot()
     {
-      root = new Node();
-      root->setKey(key);
+      root = root->getParent();
     }
 
     void printInOrder() { inOrder(root); }

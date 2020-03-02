@@ -71,3 +71,5 @@ Play with the code and compare the timings you get when changing the parameters 
 The biggest difference maker seems to be with the variable "tot". Since tot determines the size of the tree, just multiplying by 10 took over 1 second longer going from 1000 to 10000 to build the tree. This was the biggest factor in how long it took my code to excute. Min and Max didn't make quite the signaficant difference in time, relative to changing tot. 
 
 This relates to what we did in class because based on the value we changed it to, we can see the effect of the time complexity. The original values in tot made my program run a long time. I would say that's going towards the relm of worse case scenario.
+
+In comparison with AVL and just regular BST, because we keep AVL tree balanced, the insertion is always significantly quicker. Which means that the algorithm stays true to keeping in speed with Logn. 
