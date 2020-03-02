@@ -59,7 +59,7 @@ public:
   }
 
   //two new functions for performring left rotations
-  void leftSingle( Node *b )
+  Node* leftSingle( Node *b )
   {
     Node *a = b->getRight();
     Node *c = b->getLeft();
@@ -75,15 +75,17 @@ public:
     a->setLeft( c );
 
     c->setParent( a );
+    return b;
   }
   
-  void leftDouble()
+  void leftDouble(Node *node)
   {
-
+    node->getRight() = rightSingle(node->getRight());
+    return leftSingle(node);
   }
 
   //two new functions for performring right rotations
-  void rightSingle( Node *b )
+  Node* rightSingle( Node *b )
   {
     Node *a = b->getLeft();
     Node *c = b->getRight();
@@ -99,11 +101,12 @@ public:
     a->setRight( c );
 
     c->setParent( a );
+    return b;
   }
 
   void rightDouble()
   {
-    
+
   }
 
 
