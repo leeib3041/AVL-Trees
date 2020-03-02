@@ -48,6 +48,7 @@ class BinaryTree
         return;
       }
       else {
+        cout << "root: " << root->getKey() << endl;
         if (node->getLeft() != nullptr) {
           inOrder(node->getLeft());
         }
@@ -82,7 +83,10 @@ class BinaryTree
     Node* TreeSearch( int key, Node *node )
     {
       //return null on empty tree or tree has only root node
-      if (root == nullptr) return root;
+      if (root == nullptr) {
+        cout << "Tree is empty, can't search an empty tree" << endl;
+        return root;
+      }
       while (hasChild( node )) {
         if (key == node->getKey()) return node;
         else if (key <= node->getKey() && node->getLeft() != nullptr) node = node->getLeft();
@@ -134,8 +138,13 @@ class BinaryTree
 
     Node* TreeDelete( int key, Node *node )
     {
+      if (root == nullptr) {
+        cout << "Tree is empty, nothing to delete" << endl;
+        return root;
+      }
       Node *curr = TreeSearch( key, node );
-      if (curr->getKey() != key) return node;
+      
+      if (curr->getKey() != key) return curr;
       if (curr != nullptr) {
         Node *parent = nullptr, *child = nullptr;
         //no children
