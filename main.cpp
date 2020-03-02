@@ -12,10 +12,10 @@ int main(int argc, char* argv[]){
   list<float> results_binary; //time for binary
 
   //for an increasing set of integers
-  int tot=10000000;
+  int tot=100;
 
   int min=0;
-  int max=100000;
+  int max=10000;
   std::default_random_engine generator;
   std::uniform_int_distribution<int> distribution(min,max);
 
@@ -34,7 +34,7 @@ int main(int argc, char* argv[]){
 
   for(auto i : values){
       //TODO.. call insert on binary tree with value i
-      // binTree.Insert( i );
+      binTree.Insert( i );
   }
   time.stop();
   cout << "Time for building (BST) " << time.getElapsedTimeInSec() << endl;

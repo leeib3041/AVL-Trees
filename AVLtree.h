@@ -19,7 +19,6 @@ public:
   void Insert( int key )
   {
     Node* last = BinaryTree::Insert( key );
-    // cout << "last: " << last->getKey() << endl;
     rebalanceAVL( last );
   }
 
@@ -28,9 +27,8 @@ public:
     //additionally you have to perform rotations if necessary
   void Delete( int key )
   {
-    // Node* last = BinaryTree::Delete( key );
-    // rebalancAVL( last );
-    // return last;
+    Node* last = BinaryTree::Delete( key );
+    rebalanceAVL( last );
   }
 
   //helper function
@@ -58,7 +56,6 @@ public:
 
       }
     }
-
   }
 
   //two new functions for performring left rotations
