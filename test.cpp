@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
     // binTree.Insert(18);
     // binTree.Insert(8);
     // binTree.Insert(8);
-    //
+    
     // binTree.printInOrder();
     // cout << endl;
     // for (int i = 0; i < 20; i++) {
@@ -52,22 +52,26 @@ int main(int argc, char* argv[])
     avl.Insert(10);
     avl.Insert(5);
     avl.Insert(15);
-    // avl.Insert(3);
-    // avl.Insert(7);
-    // avl.Insert(1);
-    // avl.Insert(10);
-    // avl.Insert(2);
+    avl.Insert(3);
+    avl.Insert(7);
+    avl.Insert(1);
+    avl.Insert(10);
+    avl.Insert(2);
     avl.Insert(55);
-    // avl.Insert(4);
-    // avl.Insert(7);
-    // avl.Insert(5);
-    // avl.Insert(15);
+    avl.Insert(4);
+    avl.Insert(7);
+    avl.Insert(5);
+    avl.Insert(15);
     avl.Insert(13);
-    avl.Insert(17);
-    // avl.Insert(18);
-    // avl.Insert(1);
+    avl.Insert(14);
+    avl.Insert(18);
+    avl.Insert(1);
+    avl.Insert(66);
     avl.printInOrder();
     cout << endl;
+
+    avl.Delete(15);
+    avl.printInOrder();
     
 
     return 0;

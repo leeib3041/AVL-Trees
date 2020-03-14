@@ -51,6 +51,7 @@ class BinaryTree
         if (node->getLeft() != nullptr) {
           inOrder(node->getLeft());
         }
+        
         int parent;
         if (node->getParent() != nullptr) parent = node->getParent()->getKey();
         else parent = 999;
@@ -191,9 +192,10 @@ class BinaryTree
     ~BinaryTree() { TreeDestroy(root); }
 
     Node* getRoot() { return root; }
-    void setRoot()
+    void setRoot( Node *newRoot )
     {
-      root = root->getParent();
+      root = newRoot;
+      cout << "root: " << root->getKey() << endl;
     }
 
     void printInOrder() { inOrder(root); }

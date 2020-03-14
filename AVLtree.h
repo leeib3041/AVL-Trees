@@ -22,7 +22,6 @@ public:
   void Insert( int key )
   {
     Node* last = BinaryTree::Insert( key );
-    // cout << "last: " << last->getKey() << endl;
     rebalanceAVL( last );
   }
 
@@ -59,62 +58,65 @@ public:
           node = node->getLeft();
           int left_h = height(node->getLeft());
           int right_h = height(node->getRight());
-          if (right_h < left_h) rightSingle( node ); 
-          else rightDouble( node );
+          if (left_h > right_h) node = leftLeft( node ); 
+          else node = leftRight( node->getRight() );
         }
-        if (left_h < right_h){
+        if (right_h > left_h){
           node = node->getRight();
           int left_h = height(node->getLeft());
           int right_h = height(node->getRight());
-          if (right_h > left_h) leftSingle( node );
-          else leftDouble( node );
+          if (right_h > left_h) node = rightRight( node );
+          else node = rightLeft( node->getLeft() );
         }
       }
     }
+  }
 
+  void updateParent( Node *p, Node *a, Node *b )
+  {
+    if (p->getLeft() == a) p->setLeft( b );
+    else p->setRight( b );
   }
 
   //two new functions for performring left rotations
-  Node* leftSingle( Node *b )
+  Node* rightRight( Node *b )
   {
-    Node *a = b->getRight();
-    Node *temp = a->getLeft();
-    
-    b->setRight( a->getLeft() );
-    a->setLeft( b );
-    a->setParent( b->getParent() );
-    b->setParent( a );
-    if (temp != nullptr) temp->setParent( b );
-    if (a->getParent() == nullptr) BinaryTree::setRoot();
+    Node *a = b->getParent();
 
-    return a;
+    a->setRight( b->getLeft() );
+    if (b->getLeft() != nullptr) b->getLeft()->setParent( a );
+    b->setLeft( a );
+    if (a->getParent() == nullptr) setRoot( b );
+    else updateParent( a->getParent(), a, b );
+    b->setParent( a->getParent() );
+    a->setParent( b );
+    return b;
   }
-  
-  void leftDouble( Node *b )
+
+  Node* rightLeft( Node *b)
   {
-    Node *temp = rightSingle( b );
-    leftSingle( temp->getParent() );
+    Node *right = leftLeft( b );
+    return rightRight( right );
   }
 
   //two new functions for performring right rotations
-  Node* rightSingle( Node *b )
+  Node* leftLeft( Node *b )
   {
-    Node *a = b->getLeft();
-    Node *temp = a->getRight();
-    
-    b->setLeft( a->getRight() );
-    a->setRight( b );
-    a->setParent( b->getParent() );
-    b->setParent( a );
-    if (temp != nullptr) temp->setParent( b );
-    if (a->getParent() == nullptr) BinaryTree::setRoot();
+    Node *a = b->getParent();
 
-    return a;
+    a->setLeft( b->getRight() );
+    if (b->getRight() != nullptr) b->getRight()->setParent( a );
+    b->setRight( a );
+    if (a->getParent() == nullptr) setRoot( b );
+    else updateParent( a->getParent(), a, b );
+    b->setParent( a->getParent() );
+    a->setParent( b );
+    return b;
   }
-
-  void rightDouble( Node *b)
+  
+  Node* leftRight( Node *b )
   {
-    Node *temp = leftSingle( b );
-    rightSingle( temp->getParent() );
+    Node *left = rightRight( b );
+    return leftLeft( left );
   }
-};
+}; 
