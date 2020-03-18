@@ -12,10 +12,10 @@ int main(int argc, char* argv[]){
   list<float> results_binary; //time for binary
 
   //for an increasing set of integers
-  int tot=10000;
+  int tot=10000000;
 
   int min=0;
-  int max=1000;
+  int max=100000;
   std::default_random_engine generator;
   std::uniform_int_distribution<int> distribution(min,max);
 

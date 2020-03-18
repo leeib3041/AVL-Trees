@@ -195,7 +195,7 @@ class BinaryTree
     void setRoot( Node *newRoot )
     {
       root = newRoot;
-      cout << "root: " << root->getKey() << endl;
+      // cout << "root: " << root->getKey() << endl;
     }
 
     void printInOrder() { inOrder(root); }
